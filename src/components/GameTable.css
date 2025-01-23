@@ -68,8 +68,8 @@ tr {
     .mobile-table {
       display: block;
       color: black;
-      border: 1px solid #ddd;
       margin: 0;
+      font-size: large;
     }
 
     .mobile-row {

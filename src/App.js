@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AddGame from "./components/AddGame";
 import GameTable from "./components/GameTable";
+import PlayerProfile from "./components/PlayerProfile";
 
 function App() {
   const [games, setGames] = useState([]);
@@ -16,15 +18,24 @@ function App() {
   };
 
   return (
-    <div>
-      <h1 className="nhl-header">Änäri Matsien Tulokset</h1>
-      <AddGame onGameAdd={handleGameAdd} />
-      {/* <button onClick={handleReset} style={{ margin: "10px 0", padding: "10px" }}>
-        Nollaa tilastot
-      </button> */}
-      <GameTable games={games} />
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              <h1 className="nhl-header">Änäri Matsien Tulokset</h1>
+              <AddGame onGameAdd={handleGameAdd} />
+              <GameTable games={games} />
+              {/* <button onClick={handleReset}>Nollaa tilastot</button> */}
+            </div>
+          }
+        />
+        <Route path="/player/:playerName" element={<PlayerProfile />} />
+      </Routes>
+    </Router>
   );
-}
+  }
 
 export default App;
+

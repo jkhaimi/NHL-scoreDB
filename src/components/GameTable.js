@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./GameTable.css";
 
 function GameTable() {
@@ -84,20 +85,24 @@ function GameTable() {
           </thead>
           <tbody>
             {stats
-              .sort((a, b) => Number(b.winRatio) - Number(a.winRatio))
-              .map((stat, index) => (
-                <tr key={stat.name}>
-                  <td>{index + 1}.</td>
-                  <td>{stat.name}</td>
-                  <td>{stat.wins}</td>
-                  <td>{stat.losses}</td>
-                  <td>{stat.goalsFor}</td>
-                  <td>{stat.goalsAgainst}</td>
-                  <td>{stat.goalDifference}</td>
-                  <td>{stat.winRatio}%</td>
-                </tr>
-              ))}
-          </tbody>
+            .sort((a, b) => Number(b.winRatio) - Number(a.winRatio))
+            .map((stat, index) => (
+        <tr key={stat.name}>
+        <td>{index + 1}.</td>
+        <td>
+          <Link style={{color: "white", textDecoration: "none"}} to={`/player/${stat.name}`}> 
+            <strong>{stat.name}</strong>
+          </Link>
+        </td>
+        <td>{stat.wins}</td>
+        <td>{stat.losses}</td>
+        <td>{stat.goalsFor}</td>
+        <td>{stat.goalsAgainst}</td>
+        <td>{stat.goalDifference}</td>
+        <td><strong>{stat.winRatio}%</strong></td>
+      </tr>
+    ))}
+</tbody>
         </table>
       </div>
 
@@ -116,12 +121,16 @@ function GameTable() {
       </tr>
     </thead>
     <tbody>
-      {stats
-        .sort((a, b) => Number(b.winRatio) - Number(a.winRatio))
-        .map((stat, index) => (
-          <tr key={stat.name} className="mobile-row">
-            <td>{index + 1}</td>
-            <td>{stat.name}</td>
+        {stats
+            .sort((a, b) => Number(b.winRatio) - Number(a.winRatio))
+            .map((stat, index) => (
+        <tr className="mobile-row" key={stat.name}>
+        <td>{index + 1}.</td>
+        <td>
+          <Link style={{color: "white", textDecoration: "none"}} to={`/player/${stat.name}`}> 
+            <strong>{stat.name}</strong>
+          </Link>
+        </td>
             <td>{stat.wins}</td>
             <td>{stat.losses}</td>
             <td>{stat.goalDifference}</td>
