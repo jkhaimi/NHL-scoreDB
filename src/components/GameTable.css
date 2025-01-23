@@ -1,0 +1,79 @@
+/* Yleinen asettelu */
+.game-table {
+    width: 100%;
+    max-width: 800px; /* Voit säätää maksimi leveyttä tarpeen mukaan */
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Otsikon tyyli */
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Taulukon tyyli */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Poistaa kaksoisviivat */
+}
+
+/* Taulukon otsikot */
+th {
+    background-color: #f4f4f4;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 2px solid #000;
+}
+
+/* Taulukon solut */
+td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Rivit ja viivat */
+tr {
+    border-bottom: 1px solid #ccc;
+}
+
+/* Kotijoukkue ja vierasjoukkue teksti */
+.game-table div {
+    text-align: center;
+}
+
+.game-table div p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+.desktop-table {
+    display: block;
+  }
+
+  .mobile-table {
+    display: none;
+  }
+  
+  
+  /* Media query mobiililaitteille */
+  @media (max-width: 750px) {
+    .desktop-table {
+      display: none;
+    }
+  
+    .mobile-table {
+      display: block;
+      color: black;
+      border: 1px solid #ddd;
+      margin: 0;
+    }
+
+    .mobile-row {
+        color: whitesmoke;
+    }
+  }
+  
