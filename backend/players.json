@@ -1,0 +1,46 @@
+[
+  {
+    "firstname": "Jesse",
+    "lastname": "Haimi",
+    "team": "PPS United",
+    "age": 23,
+    "height": "6 foot",
+    "weight": "86 kg",
+    "city": "Vantaa",
+    "image": "../Images/Jesse.png",
+    "color": "rgba(230, 0, 0)"
+  },
+  {
+    "firstname": "Juuso",
+    "lastname": "Vuorela",
+    "team": "Jääpallo FC",
+    "age": 29,
+    "height": "175 cm",
+    "weight": "93 kg",
+    "city": "Jyväskylä",
+    "image": "../Images/Juuso.png",
+    "color": "rgba(0, 230, 0)"
+  },
+  {
+    "firstname": "Roni",
+    "lastname": "Koskinen",
+    "team": "Ei harrastuksia:D",
+    "age": 24,
+    "height": "153 cm",
+    "weight": "41 kg",
+    "city": "Tuulos",
+    "image": "../Images/Roni.png",
+    "color": "rgba(255, 0, 230)"
+  },
+  {
+    "firstname": "Mikko",
+    "lastname": "Mallikas",
+    "team": "JJK",
+    "age": 69,
+    "height": "69",
+    "weight": "69",
+    "city": "Stadi",
+    "image": "kissa",
+    "color": "#f27373"
+  }
+]
