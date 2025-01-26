@@ -50,55 +50,47 @@ function AddGame({ onGameAdd }) {
       <h2 className="add-game-title">Lisää peli</h2>
       <form onSubmit={handleSubmit} className="add-game-form">
 
-        <div className="team-selection">
-          <div className="team home-team">
-            <label>Kotijoukkue:</label>
-            <div className="player-buttons">
-              {players.map((player) => (
-                <button
-                  key={player}
-                  type="button"
-                  className={`player-button ${
-                    homePlayer === player ? "selected" : ""
-                  }`}
-                  onClick={() => setHomePlayer(player)}
-                  disabled={awayPlayer === player}
-                >
-                  {player}
-                </button>
-              ))}
-            </div>
-            {homePlayer && (
-              <p className="selected-player">Valittu: {homePlayer}</p>
-            )}
-            {!homePlayer && (
-              <p className="selected-player">Valittu: -</p>
-            )}
-          </div>
+      <div className="team-selection">
+        <div className="team home-team">
+          <label htmlFor="home-team-select">Kotijoukkue:</label>
+          <select
+            id="home-team-select"
+            className="team-select"
+            value={homePlayer || ""}
+            onChange={(e) => setHomePlayer(e.target.value)}
+          >
+            <option value="" disabled>
+              Valitse pelaaja
+            </option>
+            {players.map((player) => (
+              <option key={player} value={player} disabled={awayPlayer === player}>
+                {player}
+              </option>
+            ))}
+          </select>
+          {homePlayer && <p className="selected-player">Valittu: {homePlayer}</p>}
+          {!homePlayer && <p className="selected-player">Valittu: -</p>}
+        </div>
 
           <div className="team away-team">
-            <label>Vierasjoukkue:</label>
-            <div className="player-buttons">
+            <label htmlFor="away-team-select">Vierasjoukkue:</label>
+            <select
+              id="away-team-select"
+              className="team-select"
+              value={awayPlayer || ""}
+              onChange={(e) => setAwayPlayer(e.target.value)}
+            >
+              <option value="" disabled>
+                Valitse pelaaja
+              </option>
               {players.map((player) => (
-                <button
-                  key={player}
-                  type="button"
-                  className={`player-button awaybutton ${
-                    awayPlayer === player ? "selected" : ""
-                  }`}
-                  onClick={() => setAwayPlayer(player)}
-                  disabled={homePlayer === player}
-                >
+                <option key={player} value={player} disabled={homePlayer === player}>
                   {player}
-                </button>
+                </option>
               ))}
-            </div>
-            {awayPlayer && (
-              <p className="selected-player">Valittu: {awayPlayer}</p>
-            )}
-            {!awayPlayer && (
-              <p className="selected-player">Valittu: -</p>
-            )}
+            </select>
+            {awayPlayer && <p className="selected-player">Valittu: {awayPlayer}</p>}
+            {!awayPlayer && <p className="selected-player">Valittu: -</p>}
           </div>
         </div>
 

@@ -2,13 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px;
   }
   
   .add-game-title {
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 20px;
   }
   
   .add-game-form {
@@ -19,16 +17,13 @@
   
   .team-selection {
     display: flex;
-    justify-content: space-between;
     width: 100%;
-    max-width: 600px;
-    margin-bottom: 20px;
+    margin-bottom: 1em;
   }
 
-  .chooseplayer {
-    font-size: 18px;
-    padding: 0.5em;
-    background-color: white;
+  .team-select {
+    width: 10em;
+    height: 3em;
   }
   
   .team {
@@ -37,6 +32,8 @@
     align-items: center;
     width: 45%;
   }
+
+  /* Pisteet */
   
   .score-section {
     display: flex;
@@ -125,10 +122,21 @@
   @media (max-width: 750px) {
     .team-selection {
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
+      margin-right: 1em;
+      margin-left: 1em;
     }  
+
+    .home-team-select {
+      font-size: large;
+    }
+
+    .team-select {
+      font-size: medium;
+      margin-right: 0.5em;
+      margin-left: 0.5em;
+    }
 
     .score-section {
       width: 20em;

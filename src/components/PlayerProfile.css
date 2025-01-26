@@ -1,8 +1,8 @@
 .player-profile {
-    max-width: 20em;
+    width: 100%;
     margin: 0 auto;
-    padding: 20px;
     text-align: center;
+    background-color: black;
   }
 
 .back-button {
@@ -14,25 +14,29 @@
     text-decoration: none;
     display: flex;
     align-items: center;
+    z-index: 1;
   }
 
 .back-button:hover {
     color: #555;
   }
 
+
+.variviiva {
+    width: 100%;
+}
+
 .profile-image {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     margin-bottom: 20px;
-    border: 1px solid whitesmoke;
   }
 
 .player-info {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 10px;
     margin-bottom: 20px;
   }
 
@@ -97,25 +101,223 @@
 
 /* Mobiilinäkymä */
 @media (max-width: 750px) {
-    .player-info {
-      justify-content: center;
-      border-top: 1px solid rgb(62, 60, 60);
-      padding-top: 2em;
+
+    .back-button {
+        font-size: xx-large;
+    }
+
+    .player-top {
+        position: relative;
+        text-align: center;
+        background-image: url("../Images/player-background.png");
+        height: 15em;
+        z-index: 0;
+    }
+
+    .player-name {
+        position: absolute;
+        font-size: 24px;
+        top: 5%;
+        left: 15%;
+        line-height: 0.5em;
+        text-align: left;
+    }
+
+    .variviiva {
+        position: absolute;
+        top: 45%;
+        z-index: -1;
+        height: 3em;
+        text-align: left;
+        padding-top: 1.5em;
+        width: 100%;
+    }
+
+    .player-team {
+        font-weight: bold;
+        padding-left: 3em;
     }
 
     .profile-image {
+        position: absolute;
+        width: auto;
+        height: 14em;
+        border-radius: 0;
+        margin-bottom: -0.2em;
+        top: 1em;
     }
 
-    .Player-game-info {
-        flex-direction: row;
+    /* Linkit */
+
+    .tabs {
+        height: 2em;
+        border-bottom: 1px solid rgba(46,46,46,255);
+    }
+
+    .tab {
+        position: relative;
+        background-color: transparent;
+        border: none;
+        color: whitesmoke;
+        font-size: medium;
+        padding-top: 0.5em;
+        margin-right: 1em;
+        margin-left: 1em;
+    }
+
+    .active {
+        border-bottom: 1px solid whitesmoke;
+        padding-bottom: 0.4em;
+    }
+
+
+    /* Tiedot sivu */
+
+    .player-info {
+      justify-content: space-between;
+      text-align: center;
+      border-top: 1px solid rgb(62, 60, 60);
+      padding-top: 2em;
+      background-color: rgba(26,26,26,255);
+      border-radius: 10%;
+      margin: 1em;
+      gap: 1em;
+      padding-top: 1.5em;
+      padding-bottom: 1em;
+    }
+
+    .info-item {
+        flex: 1 1 calc(40% - 10px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 0.5em;
+      }
+
+    /* Pelatut pelit */
+
+    .games-played {
+        font-weight: bold;
+        font-size: x-large;
     }
 
     .player-info p {
-      flex: 1 1 45%; /* Asettaa kaksi riviä vierekkäin */
+      flex: 1 1 45%;
       margin-bottom: 10px;
     }
 
     table th, table td {
       font-size: 18px;
     }
+
+    .game-row {
+        background-color: rgba(26,26,26,255);
+        border: 2px solid rgba(46,46,46,255);
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    .show-all-button {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        padding: 10px 15px;
+        background-color: transparent;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: large;
+        text-decoration: underline;
+      }
+
+      .hide-all-button {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        padding: 10px 15px;
+        background-color: transparent;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: large;
+        text-decoration: underline;
+      }      
+      
+      
+      .show-all-button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Tilastot sivu */
+
+      .player-stats {
+        height: auto;
+      }
+
+      .games-played {
+        margin-top: 1.5em;
+        font-size: medium;
+        font-weight: normal;
+      }
+
+      .player-games-stats {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1em;
+        margin-bottom: 1em;
+      }
+
+      .player-games-stats span {
+        flex: 0 0 40%;
+        text-align: center;
+      }
+
+      .doughnuts {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1em;
+        padding-bottom: 3em;
+      }
+
+      .doughnut {
+        width: 45%;
+        color: whitesmoke;
+        background-color: rgba(46,46,46,255);
+        border-radius: 10px;
+        padding-bottom: 0.5em;
+      }
+
+      .doughnut-1 {
+        position: relative;
+        top: 7.5em;
+        right: 2.8em;
+        font-size: 15px;
+        font-weight: bold;
+      }
+
+      .doughnut-2 {
+        position: relative;
+        top: 7.5em;
+        left: 7.9em;
+        font-size: 15px;
+        font-weight: bold;
+      }
+
+      .doughnut-3 {
+        position: relative;
+        top: 20.7em;
+        right: 6.7em;
+        font-size: 15px;
+        font-weight: bold;
+      }
+
+      .doughnut-4 {
+        position: relative;
+        top: 20.7em;
+        left: 2.9em;
+        font-size: 15px;
+        font-weight: bold;
+      }
 }

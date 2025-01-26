@@ -6,11 +6,9 @@ const fs = require("fs");
 const app = express();
 const PORT = 3001;
 
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
-// Tiedosto, johon tulokset tallennetaan
 const filePath = "./games.json";
 
 // API: Hae kaikki tulokset

@@ -19,4 +19,6 @@ code {
   background-color: rebeccapurple;
   padding-bottom: 0.5em;
   padding-top: 0.5em;
+  max-width: 100%;
+  font-size: x-large;
 }
