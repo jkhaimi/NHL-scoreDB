@@ -26,14 +26,14 @@ app.get("/api/games", (req, res) => {
 // API: Lisää uusi tulos
 app.post("/api/games", (req, res) => {
   const newGame = req.body;
-  fs.readFile(filePath, "utf-8", (err, data) => {
+  fs.readFile(gamesFilePath, "utf-8", (err, data) => {
     if (err) {
       return res.status(500).json({ error: "Tiedoston lukeminen epäonnistui" });
     }
     const games = JSON.parse(data || "[]");
     games.push(newGame);
 
-    fs.writeFile(filePath, JSON.stringify(games, null, 2), (err) => {
+    fs.writeFile(gamesFilePath, JSON.stringify(games, null, 2), (err) => {
       if (err) {
         return res.status(500).json({ error: "Tiedoston tallentaminen epäonnistui" });
       }
@@ -53,6 +53,7 @@ app.get("/api/players", (req, res) => {
   });
 });
 
+// API: Lisää uusi pelaaja
 app.post("/api/players", (req, res) => {
   const newPlayer = req.body;
 
@@ -73,7 +74,6 @@ app.post("/api/players", (req, res) => {
     })
   })
 })
-
 
 // Käynnistä palvelin
 app.listen(PORT, () => {
