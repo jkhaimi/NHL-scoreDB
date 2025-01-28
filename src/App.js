@@ -16,8 +16,8 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const gamesResponse = await fetch("http://localhost:3001/api/games");
-      const playersResponse = await fetch("http://localhost:3001/api/players");
+      const playersResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/players`);
+      const gamesResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/games`);
       const gamesData = await gamesResponse.json();
       const playersData = await playersResponse.json();
 

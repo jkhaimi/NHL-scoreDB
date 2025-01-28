@@ -32,13 +32,13 @@ function PlayerProfile() {
     window.scrollTo(0, 0);
 
     const fetchPlayers = async () => {
-      const response = await fetch("http://localhost:3001/api/players");
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/players`);
       const data = await response.json();
       setPlayers(data);
     }
 
     const fetchGames = async () => {
-      const response = await fetch("http://localhost:3001/api/games");
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/games`);
       const data = await response.json();
       setGames(data);
     };
