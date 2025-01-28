@@ -157,5 +157,5 @@ app.delete("/api/players/:id", (req, res) => {
 
 // Käynnistä palvelin
 app.listen(PORT, () => {
-  console.log(`Palvelin käynnissä osoitteessa http://localhost:${PORT}`);
+  console.log(`Palvelin käynnissä osoitteessa http://ec2-13-60-31-221.eu-north-1.compute.amazonaws.com:${PORT}`);
 });
