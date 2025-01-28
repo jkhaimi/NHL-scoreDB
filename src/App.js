@@ -46,10 +46,14 @@ function App() {
 const Home = ({ players, games, fetchData, setMenuOpen, menuOpen }) => {
   const location = useLocation(); // React Routerin sijainti
 
-  // Hakee tiedot uudelleen aina, kun sijainti (reitti) muuttuu
+  // // Hakee tiedot uudelleen aina, kun sijainti (reitti) muuttuu
+  // useEffect(() => {
+  //   fetchData();
+  // }, [location]);
+
   useEffect(() => {
     fetchData();
-  }, [location]);
+  }, [fetchData, location]);
 
   return (
     <div>
