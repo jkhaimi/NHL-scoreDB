@@ -7,6 +7,7 @@ import PlayerProfile from "./components/PlayerProfile";
 import AddPlayer from "./components/AddPlayer";
 import EditPlayer from "./components/EditPlayer";
 import StanleyCup from "./Images/Stanley_Cup.png";
+import Footer from "./components/Footer";
 
 function App() {
   const [players, setPlayers] = useState([]);
@@ -97,6 +98,9 @@ const Home = ({ players, games, fetchData, setMenuOpen, menuOpen }) => {
       <div className="app">
         <AddGame />
         <GameTable players={players} games={games} />
+      </div>
+      <div className="app">
+        <Footer />
       </div>
     </div>
   );
