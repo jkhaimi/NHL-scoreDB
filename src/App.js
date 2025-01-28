@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes, Link, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import AddGame from "./components/AddGame";
 import GameTable from "./components/GameTable";
 import PlayerProfile from "./components/PlayerProfile";
