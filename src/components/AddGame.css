@@ -79,14 +79,7 @@
     font-size: 16px;
     cursor: pointer;
   }
-  
-  .add-game-submit {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
+    
   .player-buttons {
     display: flex;
     gap: 10px;
@@ -120,15 +113,26 @@
 
   
   @media (max-width: 750px) {
+
+    .add-game {
+      background-color: rgb(15, 15, 15);
+      padding-bottom: 1em;
+    }
+
     .team-selection {
       display: flex;
       justify-content: center;
       align-items: center;
       margin-right: 1em;
       margin-left: 1em;
+      background-color: rgba(26,26,26,255);  
+      border-radius: 15px;  
+      padding-top: 1.5em;
+      padding-bottom: 0.5em;
     }  
 
-    .home-team-select {
+    .home-team-select, .away-team-select {
+      margin-bottom: 0.5em;
       font-size: large;
     }
 
@@ -138,15 +142,57 @@
       margin-left: 0.5em;
     }
 
+    /* Pisteiden lisäys */
+
+    .score-viiva {
+      font-size: 96px;
+      margin-top: 0.2em;
+    }
+
     .score-section {
-      width: 20em;
+      width: 100%;
+      background-color: rebeccapurple;
+      background-color: rgba(26,26,26,255);
+      padding-top: 1em;
+      padding-bottom: 1em;
+      border-radius: 15px;
     }
 
     .score-buttons {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 5px;
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 10px; 
+      justify-items: center;
+      align-items: center;
     }
+    
+    .score-buttons button {
+      width: 40px;
+      height: 40px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      background-color: #f4f4f4;
+      cursor: pointer;
+      border: 1px solid rgba(46,46,46,255);   
+    }
+
+    .add-game-submit {
+      width: 100%;
+      padding: 0.7rem;
+      background-color: rgba(26,26,26,255);  
+      border: none;
+      border-top: 3px solid rgba(46,46,46,255);   
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    
+    .score-buttons button.zero-button {
+      grid-column: 2;
+    }
+    
 
     .scorebox-header {
       text-align: center;

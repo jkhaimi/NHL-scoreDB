@@ -8,7 +8,8 @@
     "weight": "86",
     "city": "Vantaa",
     "image": "../Images/Jesse.png",
-    "color": "rgba(230, 0, 0)"
+    "color": "rgba(230, 0, 0)",
+    "id": 1
   },
   {
     "firstname": "Juuso",
@@ -19,7 +20,8 @@
     "weight": "93",
     "city": "Jyväskylä",
     "image": "../Images/Juuso.png",
-    "color": "rgba(0, 230, 0)"
+    "color": "rgba(0, 230, 0)",
+    "id": 2
   },
   {
     "firstname": "Roni",
@@ -30,7 +32,8 @@
     "weight": "41",
     "city": "Tuulos",
     "image": "../Images/Roni.png",
-    "color": "rgba(255, 0, 230)"
+    "color": "rgba(255, 0, 230)",
+    "id": 3
   },
   {
     "firstname": "Miro",
@@ -41,6 +44,7 @@
     "weight": "103",
     "city": "Järvenpää",
     "image": "../Images/Miro.png",
-    "color": "#7b73f2"
+    "color": "#7b73f2",
+    "id": 4
   }
 ]

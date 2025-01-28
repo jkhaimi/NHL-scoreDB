@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import "./PlayerProfile.css";
-import JuusoImage from "../Images/Juuso.png";
-import JesseImage from "../Images/Jesse.png";
-import RoniImage from "../Images/Roni.png";
 import { LuArrowLeft } from "react-icons/lu";
+import defaultImage from "../Images/default.png";
 
 import {
     Chart as ChartJS,
@@ -24,6 +22,7 @@ ChartJS.register(
 
 function PlayerProfile() {
   const { playerName } = useParams();
+  const [players, setPlayers] = useState([]);
   const [games, setGames] = useState([]);
   const [showAll, setShowAll] = useState(false);
   const [activeTab, setActiveTab] = useState("Tiedot");
@@ -32,22 +31,23 @@ function PlayerProfile() {
   useEffect(() => {
     window.scrollTo(0, 0);
 
+    const fetchPlayers = async () => {
+      const response = await fetch("http://localhost:3001/api/players");
+      const data = await response.json();
+      setPlayers(data);
+    }
+
     const fetchGames = async () => {
       const response = await fetch("http://localhost:3001/api/games");
       const data = await response.json();
       setGames(data);
     };
 
+    fetchPlayers();
     fetchGames();
   }, []);
 
-  const players = {
-    Jesse: { color: "rgba(230, 0, 0)", team: "PPS United", firstname: "Jesse", lastname: "Haimi", age: 23, height: "6 foot", weight: "86 kg", city: "Vantaa", image: JesseImage },
-    Juuso: { color:"rgba(0, 230, 0)", team: "Jääpallo FC", firstname: "Juuso", lastname: "Vuorela", age: 29, height: "175 cm", weight: "93 kg", city: "Jyväskylä", image: JuusoImage },
-    Roni: { color:"rgba(255, 0, 230)", team: "Ei harrastuksia:D", firstname: "Roni", lastname: "Koskinen", age: 24, height: "153 cm", weight: "41 kg", city: "Tuulos", image: RoniImage },
-  };
-
-  const player = players[playerName];
+  const player = players.find((p) => p.firstname === playerName);
 
   if (!player) {
     return <div>Pelaajaa ei löytynyt.</div>;
@@ -67,11 +67,11 @@ function PlayerProfile() {
         </div>
         <div className="info-item">
           <p>Pituus</p>
-          <p><strong>{player.height}</strong></p>
+          <p><strong>{player.height} cm</strong></p>
         </div>
         <div className="info-item">
           <p>Paino</p>
-          <p><strong>{player.weight}</strong></p>
+          <p><strong>{player.weight} kg</strong></p>
         </div>
         <div className="info-item">
           <p>Kaupunki</p>
@@ -149,6 +149,25 @@ function PlayerProfile() {
       }).length;
 
     const winPercentage = totalGames > 0 ? ((wins / totalGames) * 100).toFixed(1) : 0;
+
+    const goalsFor = playerGames.reduce((total, game) => {
+      if (game.homePlayer === playerName) {
+        return total + game.homeScore; 
+      } else if (game.awayPlayer === playerName) {
+        return total + game.awayScore; 
+      }
+      return total;
+    }, 0);
+
+    const goalsAgainst = playerGames.reduce((total, game) => {
+      if (game.homePlayer === playerName) {
+        return total + game.awayScore; 
+      } else if (game.awayPlayer === playerName) {
+        return total + game.homeScore;
+      }
+      return total;
+    }, 0);
+
 
     const homeGames = playerGames.filter((game) => {
         return (
@@ -244,12 +263,16 @@ function PlayerProfile() {
 
     return (
       <div className="player-stats">
+        <div className="player-stats-box">
         <p className="games-played">Pelatut pelit: <strong>{totalGames}</strong></p>
         <div className="player-games-stats">
-            <span>Voitot: <strong>{wins}</strong></span>
-            <span>Häviöt: <strong>{losses}</strong></span>
-            <span>Kotipelit: <strong>{homeGames}</strong></span>
-            <span>Vieraspelit: <strong>{awayGames}</strong></span>
+            <span>Voitot <strong>{wins}</strong></span>
+            <span>Häviöt <strong>{losses}</strong></span>
+            <span>Kotipelit <strong>{homeGames}</strong></span>
+            <span>Vieraspelit <strong>{awayGames}</strong></span>
+            <span>Tehdyt maalit <strong>{goalsFor}</strong></span>
+            <span>Päästetyt maalit <strong>{goalsAgainst}</strong></span>
+            </div>
         </div>
         <span className="doughnut-1">{winPercentage}%</span>
         <span className="doughnut-2">{longestWinStreak}</span>
@@ -298,7 +321,8 @@ function PlayerProfile() {
         <div className="variviiva" style={{ backgroundColor: player.color }}>
           <span className="player-team">{player.team}</span>
         </div>
-        <img src={player.image} alt={`${playerName}`} className="profile-image" />
+        <img src={player.image || defaultImage} alt={`${playerName}`} 
+          className={`profile-image ${player.image ? "" : "default-image"}`} />
       </div>
 
       <div className="tabs">

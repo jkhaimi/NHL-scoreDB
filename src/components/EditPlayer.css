@@ -1,0 +1,54 @@
+.edit-player {
+    padding: 20px;
+  }
+  
+  .player-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .player-button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .player-button:hover {
+    background-color: #0056b3;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  form label {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  form button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  form button[type="button"] {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  

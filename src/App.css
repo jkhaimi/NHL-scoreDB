@@ -1,0 +1,112 @@
+.app {
+  display: none;
+}
+
+.desktop-view {
+  display: block;
+  font-size: 64px;
+  text-align: center;
+}
+
+@media (max-width: 750px) {
+
+  .app {
+    display: block;
+  }
+
+  .desktop-view {
+    display: none;
+  }
+
+    .trophy {
+      width: 2.5em;
+      margin-top: 2em;
+    }
+    
+    .league-title {
+      font-size: 24px;
+      margin-top: 0.5em;
+      font-weight: bold;
+    }
+
+    .league-year {
+        color: rgba(106,106,106,255);
+        margin-top: -0.5em;
+    }
+
+    /* Hamburger Icon */
+.hamburger-icon {
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 1000;
+  }
+  
+  .hamburger-icon .bar {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .hamburger-icon.open .bar:nth-child(1) {
+    transform: translateY(12px) rotate(45deg);
+  }
+  
+  .hamburger-icon.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger-icon.open .bar:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+  }
+  
+  /* Fullscreen Menu */
+  .fullscreen-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .fullscreen-top {
+    margin-bottom: 1em;
+  }
+  
+  .fullscreen-menu ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .fullscreen-menu li {
+    margin: 20px 0;
+    margin-bottom: 3em;
+  }
+  
+  .fullscreen-menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    transition: color 0.3s ease;
+  }
+  
+  .fullscreen-menu li a:hover {
+    color: lightblue;
+  }
+  
+}

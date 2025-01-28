@@ -2,24 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./GameTable.css";
 
-function GameTable() {
-  const [games, setGames] = useState([]);
-
-  useEffect(() => {
-    const fetchGames = async () => {
-      const response = await fetch("http://localhost:3001/api/games");
-      const data = await response.json();
-      setGames(data);
-    };
-
-    fetchGames();
-  }, []);
-
-  const players = ["Jesse", "Juuso", "Roni", "Miro"];
+function GameTable({ players, games}) {
 
   const calculateStats = () => {
     const stats = players.map((player) => ({
-      name: player,
+      name: player.firstname,
       wins: 0,
       losses: 0,
       goalsFor: 0,
@@ -32,6 +19,7 @@ function GameTable() {
       const homePlayerStats = stats.find((stat) => stat.name === game.homePlayer);
       const awayPlayerStats = stats.find((stat) => stat.name === game.awayPlayer);
 
+    if (homePlayerStats && awayPlayerStats) {
       if (game.homeScore > game.awayScore) {
         homePlayerStats.wins++;
         awayPlayerStats.losses++;
@@ -57,6 +45,7 @@ function GameTable() {
         (awayPlayerStats.wins / (awayPlayerStats.wins + awayPlayerStats.losses)) *
         100
       ).toFixed(1);
+      }
     });
 
     return stats;
@@ -66,7 +55,6 @@ function GameTable() {
 
   return (
     <div className="game-table">
-      <h2>Pelaajien tilastot</h2>
 
       {/* Desktop-näkymä */}
       <div className="desktop-table">
@@ -108,7 +96,6 @@ function GameTable() {
 
       {/* Mobiili-näkymä */}
       <div className="mobile-table">
-  {/* Otsikko vain kerran ylhäällä */}
   <table>
     <thead>
       <tr>
