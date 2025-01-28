@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./EditPlayer.css";
+import { Link } from "react-router-dom";
+import { LuArrowLeft } from "react-icons/lu";
+import StanleyCup from "../Images/Stanley_Cup.png";
+import { useNavigate } from "react-router-dom";
+
+
 
 const EditPlayer = () => {
+  const navigate = useNavigate();
   const [players, setPlayers] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [updatedData, setUpdatedData] = useState({});
@@ -22,9 +29,7 @@ const EditPlayer = () => {
 
   const handleSelectPlayer = (player) => {
     setSelectedPlayer(player);
-    setUpdatedData(player); // Alustetaan muokattavat tiedot valitun pelaajan tiedoilla
-    console.log(player)
-    console.log(selectedPlayer)
+    setUpdatedData(player);
   };
 
   const handleChange = (e) => {
@@ -52,6 +57,7 @@ const EditPlayer = () => {
       if (response.ok) {
         alert("Pelaajan tiedot päivitetty onnistuneesti!");
         setSelectedPlayer(null);
+        navigate("/");
       } else {
         alert("Virhe pelaajan tietojen päivittämisessä!");
         console.log(updatedData)
@@ -61,9 +67,50 @@ const EditPlayer = () => {
     }
   };
 
+  const handleDelete = async () => {
+    if (!selectedPlayer) {
+      alert("Valitse ensin pelaaja!");
+      return;
+    }
+
+    // Varmistetaan poisto käyttäjältä
+    const isConfirmed = window.confirm(
+      `Haluatko varmasti poistaa pelaajan ${selectedPlayer.firstname} ${selectedPlayer.lastname}?`
+    );
+
+    if (!isConfirmed) {
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/players/${selectedPlayer.id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (response.ok) {
+        alert("Pelaaja poistettu onnistuneesti!");
+        navigate("/");
+      } else {
+        alert("Virhe pelaajan poistamisessa!");
+      }
+    } catch (error) {
+      console.error("Virhe DELETE-pyynnössä:", error);
+    }
+  };
+
   return (
     <div className="edit-player">
-      <h1>Muokkaa pelaajaa</h1>
+      <Link to="/" className="back-button">
+        <LuArrowLeft />
+      </Link>
+      <div className="player-top">
+        <img src={StanleyCup} className="trophy" alt="Stanley Cup" />
+        <p className="league-title">NHL-cup</p>
+        <p className="league-year">2025</p>
+      </div>
 
       {!selectedPlayer && (
         <div>
@@ -84,7 +131,7 @@ const EditPlayer = () => {
 
       {selectedPlayer && (
         <form onSubmit={handleSubmit}>
-          <h2>Muokkaa pelaajan tietoja</h2>
+          <div className="add-player-row">
           <label>
             Etunimi:
             <input
@@ -103,6 +150,8 @@ const EditPlayer = () => {
               onChange={handleChange}
             />
           </label>
+          </div>
+          <div className="add-player-row">
           <label>
             Joukkue:
             <input
@@ -121,6 +170,8 @@ const EditPlayer = () => {
               onChange={handleChange}
             />
           </label>
+          </div>
+          <div className="add-player-row">  
           <label>
             Pituus:
             <input
@@ -139,6 +190,8 @@ const EditPlayer = () => {
               onChange={handleChange}
             />
           </label>
+          </div>
+          <div className="add-player-row">
           <label>
             Kaupunki:
             <input
@@ -148,11 +201,35 @@ const EditPlayer = () => {
               onChange={handleChange}
             />
           </label>
-          <button type="submit">Tallenna muutokset</button>
+          <label>
+            Väri
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <input
+                type="color"
+                name="color"
+                value={updatedData.color}
+                onChange={handleChange}
+                style={{ width: "50px", height: "30px", border: "none", padding: "0" }}
+                />
+                {/* Näytetään värin koodi */}
+                <span style={{ fontSize: "16px", fontFamily: "monospace" }}>
+                {updatedData.color || "#000000"}
+                </span>
+            </div>
+          </label>
+          </div>
+          <button style={{ fontWeight: "bold" }} type="submit">Tallenna muutokset</button>
           <button type="button" onClick={() => setSelectedPlayer(null)}>
-            Peruuta
+            Vaihda pelaajaa
           </button>
-        </form>
+          <button 
+            type="button" 
+            onClick={handleDelete}
+            style={{ backgroundColor: "#dc3545" }}
+          >
+            Poista pelaaja
+          </button>
+      </form>
       )}
     </div>
   );

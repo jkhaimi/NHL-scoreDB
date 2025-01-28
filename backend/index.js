@@ -99,7 +99,7 @@ app.post("/api/players", (req, res) => {
 })
 
 app.put("/api/players/:id", (req, res) => {
-  const playerId = req.params.id; // Pelaajan ID
+  const playerId = parseInt(req.params.id); // Muunnetaan ID numeroksi
   const updatedPlayer = req.body; // Päivitetyt tiedot
 
   fs.readFile(playersFilePath, "utf-8", (err, data) => {
@@ -124,6 +124,33 @@ app.put("/api/players/:id", (req, res) => {
         return res.status(500).json({ error: "Tiedoston tallentaminen epäonnistui" });
       }
       res.status(200).json(players[playerIndex]);
+    });
+  });
+});
+
+// API: Poista pelaaja
+app.delete("/api/players/:id", (req, res) => {
+  const playerId = parseInt(req.params.id);
+
+  fs.readFile(playersFilePath, "utf-8", (err, data) => {
+    if (err) {
+      return res.status(500).json({ error: "Tiedoston lukeminen epäonnistui" });
+    }
+
+    let players = JSON.parse(data || "[]");
+    const playerIndex = players.findIndex((player) => player.id === playerId);
+
+    if (playerIndex === -1) {
+      return res.status(404).json({ error: "Pelaajaa ei löytynyt" });
+    }
+
+    players = players.filter((player) => player.id !== playerId);
+
+    fs.writeFile(playersFilePath, JSON.stringify(players, null, 2), (err) => {
+      if (err) {
+        return res.status(500).json({ error: "Tiedoston tallentaminen epäonnistui" });
+      }
+      res.status(200).json({ message: "Pelaaja poistettu onnistuneesti" });
     });
   });
 });

@@ -8,7 +8,7 @@
     "weight": "86",
     "city": "Vantaa",
     "image": "../Images/Jesse.png",
-    "color": "rgba(230, 0, 0)",
+    "color": "#dca3a3",
     "id": 1
   },
   {
@@ -20,7 +20,7 @@
     "weight": "93",
     "city": "Jyväskylä",
     "image": "../Images/Juuso.png",
-    "color": "rgba(0, 230, 0)",
+    "color": "#31dd53",
     "id": 2
   },
   {
@@ -32,7 +32,7 @@
     "weight": "41",
     "city": "Tuulos",
     "image": "../Images/Roni.png",
-    "color": "rgba(255, 0, 230)",
+    "color": "#a036b5",
     "id": 3
   },
   {

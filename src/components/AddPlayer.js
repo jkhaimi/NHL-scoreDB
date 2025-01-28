@@ -169,7 +169,7 @@ const handleSubmit = async (e) => {
                 {playerData.color || "#000000"}
                 </span>
             </div>
-            </label>
+          </label>
 
         </div>
         {/* <label>
