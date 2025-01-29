@@ -14,7 +14,7 @@ function AddGame({ onGameAdd }) {
     const fetchPlayers = async () => {
       try {
         // const response = await fetch(`${process.env.REACT_APP_API_URL}/api/players`)
-        const response = await fetch('/api/games');
+        const response = await fetch('/api/players');
         const data = await response.json();
         console.log(data)
         setPlayers(data);

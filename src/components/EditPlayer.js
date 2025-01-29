@@ -16,7 +16,8 @@ const EditPlayer = () => {
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/players`);
+        // const response = await fetch(`${process.env.REACT_APP_API_URL}/api/players`);
+        const response = await fetch('/api/players');
         const data = await response.json();
         setPlayers(data);
       } catch (error) {
@@ -46,7 +47,8 @@ const EditPlayer = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/players/${selectedPlayer.id}`, {
+      // const response = await fetch(`${process.env.REACT_APP_API_URL}/api/players/${selectedPlayer.id}`, {
+        const response = await fetch(`/api/players/${selectedPlayer.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -84,7 +86,8 @@ const EditPlayer = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3001/api/players/${selectedPlayer.id}`,
+        // `http://localhost:3001/api/players/${selectedPlayer.id}`,
+        `/api/players/${selectedPlayer.id}`,
         {
           method: "DELETE",
         }

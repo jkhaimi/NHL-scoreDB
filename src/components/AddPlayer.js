@@ -38,7 +38,7 @@ const handleSubmit = async (e) => {
   
     try {
       // const response = await fetch(`${process.env.REACT_APP_API_URL}/api/players`, {
-        const response = await fetch('/api/games', {
+        const response = await fetch('/api/players', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
