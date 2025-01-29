@@ -16,6 +16,7 @@ function AddGame({ onGameAdd }) {
         // const response = await fetch(`${process.env.REACT_APP_API_URL}/api/players`)
         const response = await fetch('/api/games');
         const data = await response.json();
+        console.log(data)
         setPlayers(data);
       } catch (error) {
         console.error("Virhe pelaajien hakemisessa:", error);
@@ -58,6 +59,9 @@ function AddGame({ onGameAdd }) {
       }
     } catch (error) {
       console.error("Virhe pelin tallennuksessa:", error);
+      console.log(error)
+      console.log(game)
+      console.log(players)
     }
   };
 
