@@ -13,7 +13,8 @@ function AddGame({ onGameAdd }) {
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/players`)
+        // const response = await fetch(`${process.env.REACT_APP_API_URL}/api/players`)
+        const response = await fetch('/api/games');
         const data = await response.json();
         setPlayers(data);
       } catch (error) {
@@ -39,7 +40,8 @@ function AddGame({ onGameAdd }) {
 
     // Lähetä tiedot backendille
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/games`, {
+      // const response = await fetch(`${process.env.REACT_APP_API_URL}/api/games`, {
+        const response = await fetch('/api/games', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(game),
