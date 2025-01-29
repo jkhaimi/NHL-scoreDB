@@ -6,7 +6,13 @@ const fs = require("fs");
 const app = express();
 const PORT = 3001;
 
-app.use(cors());
+app.use(cors({
+  origin: ['https://nhl-score-db.vercel.app', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+  allowedHeaders: ['Content-Type']
+}));
+
 app.use(bodyParser.json());
 
 const gamesFilePath = "./games.json";
