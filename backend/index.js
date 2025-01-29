@@ -30,7 +30,32 @@ fs.readFile(playersFilePath, "utf-8", (err, data) => {
     if (err) {
       console.error("Tiedoston tallentaminen epäonnistui:", err);
     } else {
-      console.log("ID:t lisätty onnistuneesti!");
+      console.log("Pelaajien ID:t lisätty onnistuneesti!");
+    }
+  });
+});
+
+// ID
+
+fs.readFile(gamesFilePath, "utf-8", (err, data) => {
+  if (err) {
+    console.error("Tiedoston lukeminen epäonnistui:", err);
+    return;
+  }
+
+  const games = JSON.parse(data || "[]");
+
+  // Lisää ID:t, jotka alkavat 1:stä ja kasvavat yhdellä
+  const updatedGames = games.map((game, index) => ({
+    ...game,
+    id: index + 1,
+  }));
+
+  fs.writeFile(gamesFilePath, JSON.stringify(updatedGames, null, 2), (err) => {
+    if (err) {
+      console.error("Tiedoston tallentaminen epäonnistui:", err);
+    } else {
+      console.log("Pelien ID:t lisätty onnistuneesti!");
     }
   });
 });
