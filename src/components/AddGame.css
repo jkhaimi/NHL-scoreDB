@@ -201,4 +201,30 @@
     .zero-button {
     }
 
+    .notification {
+      position: fixed;
+      top: 1em;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50px;
+      color: white;
+      z-index: 1000;
+      transition: opacity 0.5s ease;
+      background-color: whitesmoke;
+      font-weight: bold;
+      padding: 1em;
+      width: 95%;
+      text-align: center;
+    }
+    
+    .notification.success {
+      color: green;
+      border: 3px solid green;
+    }
+    
+    .notification.error {
+      color: red;
+      border: 3px solid red;
+    }
+
 }

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./GameTable.css";
 
 function GameTable({ players, games}) {
+  const [filter, setFilter] = useState("all");
 
   const calculateStats = () => {
     const stats = players.map((player) => ({
@@ -53,81 +54,48 @@ function GameTable({ players, games}) {
 
   const stats = calculateStats();
 
+  const filteredStats = filter === "over10" ? stats.filter(stat => stat.wins + stat.losses > 10) : stats;
+
   return (
     <div className="game-table">
 
-      {/* Desktop-näkymä */}
-      <div className="desktop-table">
-        <table className="table">
+      <div className="gametable-filters">
+        <button className={`gametable-filter ${filter === "all" ? "gametable-active" : ""}`} onClick={() => setFilter("all")}>Kaikki</button>
+        <button className={`gametable-filter ${filter === "over10" ? "gametable-active" : ""}`} onClick={() => setFilter("over10")}>Yli 10 peliä</button>
+      </div>
+
+      <div className="mobile-table">
+        <table>
           <thead>
-            <tr style={{color: "black"}}>
-              <th>Sijoitus</th>
+            <tr>
+              <th>•</th>
               <th>Pelaaja</th>
-              <th>Voitot</th>
-              <th>Häviöt</th>
-              <th>Tehdyt maalit</th>
-              <th>Päästetyt maalit</th>
-              <th>Maaliero</th>
-              <th>Voittoprosentti</th>
+              <th>W</th>
+              <th>L</th>
+              <th>GD</th>
+              <th>W%</th>
             </tr>
           </thead>
           <tbody>
-            {stats
-            .sort((a, b) => Number(b.winRatio) - Number(a.winRatio))
-            .map((stat, index) => (
-        <tr key={stat.name}>
-        <td>{index + 1}.</td>
-        <td>
-          <Link style={{color: "white", textDecoration: "none"}} to={`/player/${stat.name}`}> 
-            <strong>{stat.name}</strong>
-          </Link>
-        </td>
-        <td>{stat.wins}</td>
-        <td>{stat.losses}</td>
-        <td>{stat.goalsFor}</td>
-        <td>{stat.goalsAgainst}</td>
-        <td>{stat.goalDifference}</td>
-        <td><strong>{stat.winRatio}%</strong></td>
-      </tr>
-    ))}
-</tbody>
+            {filteredStats
+              .sort((a, b) => Number(b.winRatio) - Number(a.winRatio))
+              .map((stat, index) => (
+                <tr className="mobile-row" key={stat.name}>
+                  <td>{index + 1}.</td>
+                  <td>
+                    <Link style={{ color: "white", textDecoration: "none" }} to={`/player/${stat.name}`}>
+                      <strong>{stat.name}</strong>
+                    </Link>
+                  </td>
+                  <td>{stat.wins}</td>
+                  <td>{stat.losses}</td>
+                  <td>{stat.goalDifference}</td>
+                  <td><strong>{stat.winRatio}%</strong></td>
+                </tr>
+              ))}
+          </tbody>
         </table>
       </div>
-
-      {/* Mobiili-näkymä */}
-      <div className="mobile-table">
-  <table>
-    <thead>
-      <tr>
-        <th>•</th>
-        <th>Pelaaja</th>
-        <th>W</th>
-        <th>L</th>
-        <th>GD</th>
-        <th>W%</th>
-      </tr>
-    </thead>
-    <tbody>
-        {stats
-            .sort((a, b) => Number(b.winRatio) - Number(a.winRatio))
-            .map((stat, index) => (
-        <tr className="mobile-row" key={stat.name}>
-        <td>{index + 1}.</td>
-        <td>
-          <Link style={{color: "white", textDecoration: "none"}} to={`/player/${stat.name}`}> 
-            <strong>{stat.name}</strong>
-          </Link>
-        </td>
-            <td>{stat.wins}</td>
-            <td>{stat.losses}</td>
-            <td>{stat.goalDifference}</td>
-            <td><strong>{stat.winRatio}%</strong></td>
-          </tr>
-        ))}
-    </tbody>
-  </table>
-</div>
-
     </div>
   );
 }

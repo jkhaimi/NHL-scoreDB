@@ -1,16 +1,26 @@
 import React, { useState, useEffect } from "react";
 import "./AddGame.css";
 
+const Notification = ({ message, type }) => {
+  return (
+    <div className={`notification ${type}`}>
+      {message}
+    </div>
+  );
+};
+
 function AddGame({ onGameAdd }) {
   const [players, setPlayers] = useState([]);
   const [homePlayer, setHomePlayer] = useState("");
   const [awayPlayer, setAwayPlayer] = useState("");
   const [homeScore, setHomeScore] = useState("");
   const [awayScore, setAwayScore] = useState("");
+  const [notification, setNotification] = useState({ message: "", type: "" });
 
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
   useEffect(() => {
+    
     const fetchPlayers = async () => {
       try {
         // const response = await fetch(`${process.env.REACT_APP_API_URL}/api/players`)
@@ -25,9 +35,19 @@ function AddGame({ onGameAdd }) {
     fetchPlayers();
   }, []);
 
+  useEffect(() => {
+    if (notification.message) {
+      const timer = setTimeout(() => {
+        setNotification({ message: "", type: "" });
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [notification]);
+
   const handleSubmit = async (e) => {
+    e.preventDefault(); // Varmista, että estät oletustoiminnon
     if (!homePlayer || !awayPlayer || homePlayer === awayPlayer) {
-      alert("Valitse eri pelaajat kotijoukkueelle ja vierasjoukkueelle.");
+      setNotification({ message: "Valitse eri pelaajat kotijoukkueelle ja vierasjoukkueelle.", type: "error" });
       return;
     }
 
@@ -48,16 +68,16 @@ function AddGame({ onGameAdd }) {
       });
 
       if (response.ok) {
-        alert("Peli lisätty!");
+        setNotification({ message: "Peli lisätty!", type: "success" });
         setHomePlayer("");
         setAwayPlayer("");
         setHomeScore("");
         setAwayScore("");
       } else {
-        alert("Virhe tallennuksessa!");
+        setNotification({ message: "Virhe tallennuksessa!", type: "error" });
       }
     } catch (error) {
-      console.error("Virhe pelin tallennuksessa:", error);
+      setNotification({ message: "Virhe pelin tallennuksessa!", type: "error" });
       console.log(error)
       console.log(game)
       console.log(players)
@@ -70,6 +90,7 @@ function AddGame({ onGameAdd }) {
 
   return (
     <div className="add-game">
+      {notification.message && <Notification message={notification.message} type={notification.type} />}
       <h2 className="add-game-title">Lisää peli</h2>
       <form onSubmit={handleSubmit} className="add-game-form">
         <div className="team-selection">

@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./AddPlayer.css";
 import { LuArrowLeft } from "react-icons/lu";
 import StanleyCup from "../Images/Stanley_Cup.png";
 import { useNavigate } from "react-router-dom";
 
+const Notification = ({ message, type }) => {
+  return (
+    <div className={`notification ${type}`}>
+      {message}
+    </div>
+  );
+};
+
 const AddPlayer = () => {
+  const [notification, setNotification] = useState({ message: "", type: "" });
   const navigate = useNavigate(); // Ota käyttöön navigointitoiminto
   const [playerData, setPlayerData] = useState({
     firstname: "",
@@ -18,6 +27,15 @@ const AddPlayer = () => {
     color: "",
   });
 //   const [imageFile, setImageFile] = useState(null);
+
+useEffect(() => {
+  if (notification.message) {
+    const timer = setTimeout(() => {
+      setNotification({ message: "", type: "" });
+    }, 3000);
+    return () => clearTimeout(timer);
+  }
+}, [notification]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +50,7 @@ const handleSubmit = async (e) => {
     e.preventDefault();
   
     if (!playerData.firstname || !playerData.lastname || !playerData.team || !playerData.age || !playerData.height || !playerData.weight || !playerData.city || !playerData.color) {
-      alert("Kaikki kentät täytyy täyttää!");
+      setNotification({ message: "Kaikki kentät tulee täyttää!", type: "error" });
       return;
     }
   
@@ -47,7 +65,7 @@ const handleSubmit = async (e) => {
       });
   
       if (response.ok) {
-        alert("Pelaaja lisätty onnistuneesti!");
+        setNotification({ message: "Pelaaja lisätty onnistuneesti!", type: "success" });
         setPlayerData({
           firstname: "",
           lastname: "",
@@ -60,16 +78,17 @@ const handleSubmit = async (e) => {
         });
         navigate("/"); 
       } else {
-        alert("Virhe pelaajan lisäämisessä!");
+        setNotification({ message: "Virhe pelaajan lisäämisessä!", type: "error" });
       }
     } catch (error) {
       console.error("Virhe POST-pyynnössä:", error);
-      alert("Yhteys epäonnistui.");
+      setNotification({ message: "Yhteys eoponnistui!", type: "error" });
     }
   };  
 
   return (
     <div className="add-player-container">
+      {notification.message && <Notification message={notification.message} type={notification.type} />}
       <Link to="/" className="back-button">
         <LuArrowLeft />
       </Link>

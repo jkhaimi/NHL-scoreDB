@@ -5,13 +5,21 @@ import { LuArrowLeft } from "react-icons/lu";
 import StanleyCup from "../Images/Stanley_Cup.png";
 import { useNavigate } from "react-router-dom";
 
-
+const Notification = ({ message, type }) => {
+  return (
+    <div className={`notification ${type}`}>
+      {message}
+    </div>
+  );
+};
 
 const EditPlayer = () => {
   const navigate = useNavigate();
   const [players, setPlayers] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [updatedData, setUpdatedData] = useState({});
+    const [notification, setNotification] = useState({ message: "", type: "" });
+
 
   useEffect(() => {
     const fetchPlayers = async () => {
@@ -28,6 +36,15 @@ const EditPlayer = () => {
     fetchPlayers();
   }, []);
 
+    useEffect(() => {
+    if (notification.message) {
+      const timer = setTimeout(() => {
+        setNotification({ message: "", type: "" });
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [notification]);
+
   const handleSelectPlayer = (player) => {
     setSelectedPlayer(player);
     setUpdatedData(player);
@@ -42,7 +59,7 @@ const EditPlayer = () => {
     e.preventDefault();
 
     if (!selectedPlayer) {
-      alert("Valitse ensin pelaaja!");
+      setNotification({ message: "Valitse ensin pelaaja!", type: "error" });
       return;
     }
 
@@ -57,11 +74,11 @@ const EditPlayer = () => {
       });
 
       if (response.ok) {
-        alert("Pelaajan tiedot päivitetty onnistuneesti!");
+        setNotification({ message: "Pelaajan tiedot päivitetty onnistuneesti!", type: "success" });
         setSelectedPlayer(null);
         navigate("/");
       } else {
-        alert("Virhe pelaajan tietojen päivittämisessä!");
+        setNotification({ message: "Virhe pelaajan tietojen päivittämisessä!", type: "error" });
         console.log(updatedData)
       }
     } catch (error) {
@@ -71,7 +88,7 @@ const EditPlayer = () => {
 
   const handleDelete = async () => {
     if (!selectedPlayer) {
-      alert("Valitse ensin pelaaja!");
+      setNotification({ message: "Valitse ensin pelaaja!", type: "error" });
       return;
     }
 
@@ -94,10 +111,10 @@ const EditPlayer = () => {
       );
 
       if (response.ok) {
-        alert("Pelaaja poistettu onnistuneesti!");
+        setNotification({ message: "Pelaaja poistettu onnistuneesti!", type: "success" });
         navigate("/");
       } else {
-        alert("Virhe pelaajan poistamisessa!");
+        setNotification({ message: "Virhe pelaajan poistamisessa!", type: "error" });
       }
     } catch (error) {
       console.error("Virhe DELETE-pyynnössä:", error);
@@ -106,6 +123,7 @@ const EditPlayer = () => {
 
   return (
     <div className="edit-player">
+      {notification.message && <Notification message={notification.message} type={notification.type} />}
       <Link to="/" className="back-button">
         <LuArrowLeft />
       </Link>
