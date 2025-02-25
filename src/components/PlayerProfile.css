@@ -26,13 +26,6 @@
     width: 100%;
 }
 
-.profile-image {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-  }
-
 .player-info {
     display: flex;
     flex-wrap: wrap;
@@ -145,6 +138,33 @@
         border-radius: 0;
         margin-bottom: -0.2em;
         top: 1em;
+    }
+
+    .profile-image-1 {
+    }
+  
+    .profile-image-2 {
+      height: 21em;
+      left: 9.5em;
+      top: -1em;
+    }
+
+    .profile-image-3 {
+      height: 16em;
+      left: 12.3em;
+      top: -1em;
+    }
+
+    .profile-image-4 {
+      height: 20em;
+      left: 9em;
+      top: -2.5em;
+    }
+
+    .profile-image-5 {
+      height: 21em;
+      left: 12.3em;
+      top: -1.9em;
     }
 
     .default-image {

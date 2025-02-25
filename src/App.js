@@ -17,8 +17,8 @@ function App() {
   const fetchData = async () => {
     try {
       // const playersResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/players`);
-      const playersResponse = await fetch('/api/players');
       // const gamesResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/games`);
+      const playersResponse = await fetch('/api/players');
       const gamesResponse = await fetch('/api/games');
       const gamesData = await gamesResponse.json();
       const playersData = await playersResponse.json();

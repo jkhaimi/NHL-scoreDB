@@ -324,7 +324,7 @@ function PlayerProfile() {
           <span className="player-team">{player.team}</span>
         </div>
         <img src={player.image || defaultImage} alt={`${playerName}`} 
-          className={`profile-image ${player.image ? "" : "default-image"}`} />
+          className={`profile-image profile-image-${player.id} ${player.image ? "" : "default-image"}`} />
       </div>
 
       <div className="tabs">
