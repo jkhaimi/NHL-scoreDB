@@ -141,6 +141,9 @@
     }
 
     .profile-image-1 {
+      transform: scaleX(-1);
+      /* left: 14.2em; */
+      right: -0.1em;
     }
   
     .profile-image-2 {
@@ -165,6 +168,12 @@
       height: 21em;
       left: 12.3em;
       top: -1.9em;
+    }
+
+    .profile-image-9 {
+      height: 14em;
+      right: 1em;
+      top: 1em;
     }
 
     .default-image {

@@ -50,6 +50,10 @@ function AddGame({ onGameAdd }) {
       setNotification({ message: "Valitse eri pelaajat kotijoukkueelle ja vierasjoukkueelle.", type: "error" });
       return;
     }
+    if (homeScore === awayScore) {
+      setNotification({ message: "Ei voi olla tasapeli", type: "error" });
+      return;
+    }
 
     const game = {
       homePlayer,
