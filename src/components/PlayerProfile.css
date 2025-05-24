@@ -81,11 +81,11 @@
   }
 
 .win-line {
-    background-color: green;
+    background-color: #55D765;
   }
 
 .loss-line {
-    background-color: red;
+    background-color: #C1382F;
   }
 
   td {
