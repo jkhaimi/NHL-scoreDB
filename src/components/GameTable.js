@@ -54,14 +54,14 @@ function GameTable({ players, games}) {
 
   const stats = calculateStats();
 
-  const filteredStats = filter === "over10" ? stats.filter(stat => stat.wins + stat.losses > 10) : stats;
+  const filteredStats = filter === "over20" ? stats.filter(stat => stat.wins + stat.losses > 20) : stats;
 
   return (
     <div className="game-table">
 
       <div className="gametable-filters">
         <button className={`gametable-filter ${filter === "all" ? "gametable-active" : ""}`} onClick={() => setFilter("all")}>Kaikki</button>
-        <button className={`gametable-filter ${filter === "over10" ? "gametable-active" : ""}`} onClick={() => setFilter("over10")}>Yli 10 peliä</button>
+        <button className={`gametable-filter ${filter === "over20" ? "gametable-active" : ""}`} onClick={() => setFilter("over20")}>Yli 20 peliä</button>
       </div>
 
       <div className="mobile-table">

@@ -88,6 +88,14 @@
     background-color: #C1382F;
   }
 
+.gold-line {
+    background-color: gold;
+  }
+
+.poop-line {
+  background-color: #654321
+}
+
   td {
     border: none
     }

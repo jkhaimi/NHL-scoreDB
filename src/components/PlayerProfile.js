@@ -90,6 +90,14 @@ function PlayerProfile() {
                 const isWinner =
                   (game.homePlayer === playerName && game.homeScore > game.awayScore) ||
                   (game.awayPlayer === playerName && game.awayScore > game.homeScore);
+                  
+                const isBrutalWinner =
+                  (game.homePlayer === playerName && game.homeScore >= game.awayScore + 5) ||
+                  (game.awayPlayer === playerName && game.awayScore >= game.homeScore + 5);
+
+                const isBrutalLoser =
+                  (game.homePlayer === playerName && game.homeScore + 5 <= game.awayScore) ||
+                  (game.awayPlayer === playerName && game.awayScore + 5 <= game.homeScore);
 
                 return (
                   <tr key={game.id} className="game-row">
@@ -107,7 +115,7 @@ function PlayerProfile() {
                     </td>
                     <td>
                       <div
-                        className={`result-line ${isWinner ? "win-line" : "loss-line"}`}
+                        className={`result-line ${isWinner ? "win-line" : "loss-line"} ${isBrutalWinner ? "gold-line" : ""} ${isBrutalLoser ? "poop-line" : ""}`}
                       ></div>
                     </td>
                   </tr>
